@@ -1,0 +1,9 @@
+org\example\oficina\controller\ClienteController.class
+org\example\oficina\HelloApplication.class
+module-info.class
+org\example\oficina\model\Cliente.class
+org\example\oficina\service\ClienteService.class
+org\example\oficina\HelloController.class
+org\example\oficina\validation\ClienteValidation.class
+org\example\oficina\dao\ClienteDAO.class
+org\example\oficina\util\DatabaseConnection.class

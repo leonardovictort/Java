@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.oficina.controller.ClienteController">
+
+    <VBox alignment="TOP_LEFT" layoutX="30" layoutY="20" spacing="10">
+        <children>
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Cadastro de Cliente" />
+
+            <HBox spacing="10">
+                <Label minWidth="100" text="Nome:" />
+                <TextField fx:id="nomeField" prefWidth="300" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label minWidth="100" text="CPF / CNPJ" />
+                <TextField fx:id="documentoField" prefHeight="26.0" prefWidth="300.0" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label minWidth="100" text="Pessoa Jurídica:" />
+                <CheckBox fx:id="pessoaJuridicaCheck" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label minWidth="100" text="Telefone:" />
+                <TextField fx:id="telefoneField" prefHeight="26.0" prefWidth="300.0" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label minWidth="100" text="Email:" />
+                <TextField fx:id="emailField" prefWidth="300" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label minWidth="100" text="Endereço:" />
+                <TextField fx:id="enderecoField" prefWidth="300" />
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Button onAction="#onSalvarButtonClick" text="Salvar" />
+                <Button onAction="#limparCampos" text="Limpar" />
+            </HBox>
+
+        </children>
+        <padding>
+            <Insets bottom="20" left="20" right="20" top="20" />
+        </padding>
+    </VBox>
+</AnchorPane>
