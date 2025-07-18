@@ -12,6 +12,10 @@ public class Servico {
     private String observacao;
     private OrdemServico ordemServico;
 
+    public Servico() {
+
+    }
+
     public Servico(String descricao, BigDecimal valor) {
         this.descricao = descricao;
         this.valor = valor;

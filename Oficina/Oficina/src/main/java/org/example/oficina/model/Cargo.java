@@ -3,7 +3,7 @@ package org.example.oficina.model;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public abstract class Cargo {
+public class Cargo {
 
     private int id;
     private String nome;

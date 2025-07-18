@@ -1,5 +1,6 @@
 package org.example.oficina.dao;
 
+import org.example.oficina.model.OrdemServico;
 import org.example.oficina.model.Servico;
 import java.sql.*;
 import java.util.ArrayList;
@@ -83,6 +84,24 @@ public class ServicoDAO {
         }
     }
 
+    public List<Servico> findByOrdemServico(int ordemServicoId) {
+        List<Servico> servicos = new ArrayList<>();
+        String sql = "SELECT * FROM servico WHERE ordem_servico_id = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, ordemServicoId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                servicos.add(extrairServico(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar serviços da ordem de serviço " + ordemServicoId, e);
+        }
+
+        return servicos;
+    }
+
     private void preencherStatement(PreparedStatement stmt, Servico s) throws SQLException {
         stmt.setString(1, s.getDescricao());
         stmt.setBigDecimal(2, s.getValor());
@@ -93,12 +112,19 @@ public class ServicoDAO {
     }
 
     private Servico extrairServico(ResultSet rs) throws SQLException {
-        Servico s = new Servico(rs.getString("descricao"), rs.getBigDecimal("valor"));
-        s.setId(rs.getInt("id"));
-        s.setConcluido(rs.getBoolean("concluido"));
-        s.setObservacao(rs.getString("observacao"));
-        // Aqui você pode fazer busca do mecanico e ordemServico por ID se necessário
-        return s;
+        Servico servico = new Servico();
+        servico.setId(rs.getInt("id"));
+        servico.setDescricao(rs.getString("descricao"));
+        servico.setValor(rs.getBigDecimal("valor"));
+        servico.setConcluido(rs.getBoolean("concluido"));
+        servico.setObservacao(rs.getString("observacao"));
+
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO(connection);
+        int mecanicoId = rs.getInt("mecanico_id");
+        funcionarioDAO.findById(mecanicoId).ifPresent(servico::setMecanico);
+
+        return servico;
     }
+
 }
 

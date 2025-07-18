@@ -1,5 +1,8 @@
 package org.example.oficina.model;
 
+import org.example.oficina.validator.ProdutoUtilizadoValidator;
+import org.example.oficina.validator.ServicoValidator;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,9 +22,14 @@ public class OrdemServico {
     private StatusOS statusOS;
     private String observacoes;
 
+    private final ServicoValidator servicoValidator = new ServicoValidator();
+    private final ProdutoUtilizadoValidator produtoUtilizadoValidator = new ProdutoUtilizadoValidator();
+    private OrdemServico ordemServico;
+
     public OrdemServico() {
 
     }
+
 
     public OrdemServico(Cliente cliente, Veiculo veiculo) {
         this.cliente = cliente;
@@ -61,6 +69,34 @@ public class OrdemServico {
 
         this.valorTotal = total;
         return total;
+    }
+
+    public boolean adicionarServico(Servico servico) {
+        if (ordemServico == null) {
+            throw new IllegalStateException("Ordem de serviço não definida.");
+        }
+
+        List<String> erros = servicoValidator.validarAtributos(servico);
+        if (!erros.isEmpty()) {
+            throw new IllegalArgumentException("Erro(s) de validação no serviço:\n - " + String.join("\n - ", erros));
+        }
+
+        ordemServico.adicionarServico(servico);
+        return true;
+    }
+
+    public boolean adicionarProdutoUtilizado(ProdutoUtilizado produtoUtilizado) {
+        if (ordemServico == null) {
+            throw new IllegalStateException("Ordem de serviço não definida.");
+        }
+
+        List<String> erros = produtoUtilizadoValidator.validarAtributos(produtoUtilizado);
+        if (!erros.isEmpty()) {
+            throw new IllegalArgumentException("Erro(s) de validação no produto utilizado:\n - " + String.join("\n - ", erros));
+        }
+
+        ordemServico.adicionarProdutoUtilizado(produtoUtilizado);
+        return true;
     }
 
     public int getId() {

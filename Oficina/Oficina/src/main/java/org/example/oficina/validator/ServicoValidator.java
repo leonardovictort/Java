@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ServicoValidator {
 
-    public List<String> validar(Servico servico) {
+    public List<String> validarAtributos(Servico servico) {
         List<String> erros = new ArrayList<>();
 
         if (servico.getDescricao() == null || servico.getDescricao().trim().isEmpty()) {

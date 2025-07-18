@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ProdutoUtilizadoValidator {
 
-    public List<String> validar(ProdutoUtilizado produto) {
+    public List<String> validarAtributos(ProdutoUtilizado produto) {
         List<String> erros = new ArrayList<>();
 
         if (produto.getCategoria() == null) {

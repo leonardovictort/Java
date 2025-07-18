@@ -33,24 +33,13 @@ public class OrdemServicoDAO {
         this.connection = connection;
     }
 
+
     public boolean create(OrdemServico os) {
         try (PreparedStatement stmt = connection.prepareStatement(INSERT_SQL)) {
             preencherStatement(stmt, os);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao inserir ordem de serviço", e);
-        }
-        ServicoDAO servicoDAO = new ServicoDAO(connection);
-        for (Servico servico : os.getServicos()) {
-            servico.setOrdemServico(os); // vínculo reverso
-            servicoDAO.create(servico);  // método create ou salvar que você tenha
-        }
-
-        // Salvar os produtos utilizados vinculados
-        ProdutoUtilizadoDAO produtoDAO = new ProdutoUtilizadoDAO(connection);
-        for (ProdutoUtilizado produto : os.getProdutosUtilizados()) {
-            produto.setOrdemServico(os); // vínculo reverso
-            produtoDAO.create(produto);
         }
     }
 
