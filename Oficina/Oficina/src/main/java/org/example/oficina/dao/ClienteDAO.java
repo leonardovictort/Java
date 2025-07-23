@@ -1,7 +1,6 @@
 package org.example.oficina.dao;
 
 import org.example.oficina.model.Cliente;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,6 @@ public class ClienteDAO {
         this.connection = connection;
     }
 
-    // CREATE
     public boolean create(Cliente cliente) {
         try (PreparedStatement stmt = connection.prepareStatement(INSERT_SQL)) {
             preencherStatement(stmt, cliente);
@@ -41,7 +39,6 @@ public class ClienteDAO {
         }
     }
 
-    // UPDATE
     public boolean update(Cliente cliente) {
         try (PreparedStatement stmt = connection.prepareStatement(UPDATE_SQL)) {
             preencherStatement(stmt, cliente);
@@ -53,7 +50,6 @@ public class ClienteDAO {
         }
     }
 
-    // DELETE
     public boolean delete(int id) {
         try (PreparedStatement stmt = connection.prepareStatement(DELETE_SQL)) {
             stmt.setInt(1, id);
@@ -64,7 +60,6 @@ public class ClienteDAO {
         }
     }
 
-    // READ BY ID
     public Optional<Cliente> findById(int id) {
         try (PreparedStatement stmt = connection.prepareStatement(RETRIEVE_BY_ID_SQL)) {
             stmt.setInt(1, id);
@@ -78,7 +73,6 @@ public class ClienteDAO {
         }
     }
 
-    // READ ALL
     public List<Cliente> findAll() {
         List<Cliente> clientes = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(RETRIEVE_ALL_SQL);
@@ -93,8 +87,6 @@ public class ClienteDAO {
             throw new RuntimeException("Erro ao buscar todos os clientes", e);
         }
     }
-
-    // ========== MÉTODOS AUXILIARES ==========
 
     private void preencherStatement(PreparedStatement stmt, Cliente cliente) throws SQLException {
         stmt.setString(1, cliente.getNome());

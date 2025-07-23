@@ -6,9 +6,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.example.oficina.dao.*;
 import org.example.oficina.model.*;
-import org.example.oficina.service.OrdemServicoService;
+import org.example.oficina.service.*;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -27,69 +26,43 @@ public class HelloApplication /*extends Application */{
         stage.show();
     }*/
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
        // launch();
 
-        String url = "jdbc:postgresql://localhost/Oficina";
-        String user = "postgres";
-        String password = "123";
+        ClienteService clienteService = new ClienteService();
+        VeiculoService veiculoService = new VeiculoService();
+        CargoService cargoService = new CargoService();
+        FuncionarioService funcionarioService = new FuncionarioService();
+        OrdemServicoService ordemServicoService = new OrdemServicoService();
+        ProdutoUtilizadoService produtoUtilizadoService = new ProdutoUtilizadoService();
+        ServicoService servicoService = new ServicoService();
 
-        try {
-            Connection connection = DriverManager.getConnection(url, user, password);
-            CargoDAO cargoDAO = new CargoDAO(connection);
-            FuncionarioDAO funcionarioDAO = new FuncionarioDAO(connection);
-            ClienteDAO clienteDAO = new ClienteDAO(connection);
-            OrdemServicoDAO ordemServicoDAO = new OrdemServicoDAO(connection);
-            VeiculoDAO veiculoDAO = new VeiculoDAO(connection);
-            OrdemServicoService os = new OrdemServicoService();
+        Cliente cliente = new Cliente();
+        cliente.setNome("Leonardo");cliente.setDocumento("00835831140");cliente.setPessoaJuridica(false);
+        cliente.setEmail("Theleonardovictorteodoro@gmail.com");cliente.setTelefone("64993139011");cliente.setEndereco("Morrinhos-GO");
+        cliente.setId(3);
+        /*
+            clienteService.salvarCliente(cliente);
+            clienteService.atualizarCliente(cliente);
+            clienteService.buscarPorId();
+            clienteService.listarTodos();
+            clienteService.deletarCliente();
+         */
 
-            Optional<Cliente> optionalCliente = clienteDAO.findById(1);
-            Cliente clientee = optionalCliente.get();
+        //clienteService.salvarCliente(cliente);
 
-            Optional<Veiculo> optionalVeiculo = veiculoDAO.findById(1);
-            Veiculo veiculoo = optionalVeiculo.get();
+        //clienteService.atualizarCliente(cliente);
 
-            Optional<Funcionario> optionalFuncionario = funcionarioDAO.findById(4);
-            Funcionario funcionario1 = optionalFuncionario.get();
+        //Optional<Cliente> clienteX = clienteService.buscarPorId(3);
+        //System.out.println(clienteX.toString());
 
-            //---------------------------------------------------------------------------------------
-            List<Servico> svs = new ArrayList<>();
-            Servico servico = new Servico("Troca de Oleo",new BigDecimal(22.50));
-            servico.setMecanico(funcionario1);
-            //svs.add(servico);
+        /*List<Cliente> clientes = clienteService.listarTodos();
+        for(Cliente clienteS: clientes){
+            System.out.println(clienteS.toString());
+        }*/
 
-            Servico servico2 = new Servico("Alinhamento e Balanceamento", new BigDecimal("75.00"));
-            servico2.setMecanico(funcionario1);
-            svs.add(servico2);
+        //clienteService.deletarCliente(3); necessario deletar o veiculo antes pois existe um vinculo de chaves id;
 
-            Servico servico3 = new Servico("Revisão dos Freios", new BigDecimal("120.00"));
-            servico3.setMecanico(funcionario1);
-            svs.add(servico3);
-
-            Servico servico4 = new Servico("Substituição da Correia Dentada", new BigDecimal("250.00"));
-            servico4.setMecanico(funcionario1);
-            svs.add(servico4);
-
-            Servico servico5 = new Servico("Alinhamento e Balanceamento", new BigDecimal("80.00"));
-            servico5.setMecanico(funcionario1);
-            svs.add(servico5);
-
-            Servico servico6 = new Servico("Troca de Filtro de Ar", new BigDecimal("45.00"));
-            servico6.setMecanico(funcionario1);
-            svs.add(servico6);
-
-
-            Optional<OrdemServico> optionalOrdemServico = ordemServicoDAO.findById(2);
-            OrdemServico os2 = optionalOrdemServico.get();
-            os.vincularOSeServicos(2,svs);
-            //os.salvarOrdemServico(os2);
-
-
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
     }
 }

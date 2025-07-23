@@ -1,7 +1,6 @@
 package org.example.oficina.model;
 
 import java.util.Objects;
-import java.util.Optional;
 
 public class Funcionario {
 

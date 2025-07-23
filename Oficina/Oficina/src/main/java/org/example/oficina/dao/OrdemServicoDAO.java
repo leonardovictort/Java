@@ -1,9 +1,6 @@
 package org.example.oficina.dao;
 import org.example.oficina.model.OrdemServico;
-import org.example.oficina.model.ProdutoUtilizado;
-import org.example.oficina.model.Servico;
 import org.example.oficina.model.StatusOS;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,11 +86,8 @@ public class OrdemServicoDAO {
     }
 
     private void preencherStatement(PreparedStatement stmt, OrdemServico os) throws SQLException {
-        // entrada e entrega são LocalDate, converte para java.sql.Date
         stmt.setDate(1, os.getEntrada() != null ? Date.valueOf(os.getEntrada()) : null);
         stmt.setDate(2, os.getEntrega() != null ? Date.valueOf(os.getEntrega()) : null);
-
-        // statusOS enum convertido para string
         stmt.setString(3, os.getStatusOS() != null ? os.getStatusOS().name() : null);
 
         stmt.setBigDecimal(4, os.getValorTotal());

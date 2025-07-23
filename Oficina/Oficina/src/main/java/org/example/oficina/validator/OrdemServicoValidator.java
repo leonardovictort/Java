@@ -2,7 +2,6 @@ package org.example.oficina.validator;
 
 import org.example.oficina.model.OrdemServico;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -2,7 +2,6 @@ package org.example.oficina.dao;
 
 import org.example.oficina.model.Cargo;
 import org.example.oficina.model.Funcionario;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

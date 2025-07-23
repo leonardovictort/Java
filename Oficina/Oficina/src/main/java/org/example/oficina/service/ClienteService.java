@@ -4,7 +4,6 @@ import org.example.oficina.dao.ClienteDAO;
 import org.example.oficina.model.Cliente;
 import org.example.oficina.util.DatabaseConnection;
 import org.example.oficina.validator.ClienteValidator;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;

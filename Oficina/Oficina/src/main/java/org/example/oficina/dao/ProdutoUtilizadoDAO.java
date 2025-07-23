@@ -2,6 +2,7 @@ package org.example.oficina.dao;
 
 import org.example.oficina.model.Categoria;
 import org.example.oficina.model.ProdutoUtilizado;
+import org.example.oficina.model.Servico;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -85,6 +86,24 @@ public class ProdutoUtilizadoDAO {
         }
     }
 
+    public List<ProdutoUtilizado> findByOrdemServico(int ordemServicoId) {
+        List<ProdutoUtilizado> produtoUtilizados = new ArrayList<>();
+        String sql = "SELECT * FROM produto_utilizado WHERE ordem_servico_id = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, ordemServicoId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                produtoUtilizados.add(extrairProduto(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar produtos utilizados da ordem de serviço " + ordemServicoId, e);
+        }
+
+        return produtoUtilizados;
+    }
+
     private void preencherStatement(PreparedStatement stmt, ProdutoUtilizado p) throws SQLException {
         stmt.setString(1, p.getCategoria().name());
         stmt.setString(2, p.getMarca());
@@ -107,7 +126,6 @@ public class ProdutoUtilizadoDAO {
         );
         p.setId(rs.getInt("id"));
         p.setValorTotal(rs.getBigDecimal("valor_total"));
-        // Você pode atribuir a ordem de serviço aqui se necessário
         return p;
     }
 }

@@ -59,7 +59,6 @@ public class ClienteValidator {
         return erros;
     }
 
-    // Valida CPF com dígito verificador
     private boolean isCpfValido(String cpf) {
         if (cpf == null || !cpf.matches("\\d{11}") || cpf.chars().distinct().count() == 1) return false;
 
@@ -81,7 +80,6 @@ public class ClienteValidator {
                 dv2 == Character.getNumericValue(cpf.charAt(10));
     }
 
-    // Valida CNPJ com dígito verificador
     private boolean isCnpjValido(String cnpj) {
         if (cnpj == null || !cnpj.matches("\\d{14}") || cnpj.chars().distinct().count() == 1) return false;
 

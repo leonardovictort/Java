@@ -22,6 +22,7 @@ public class ProdutoUtilizado {
         this.custoUnitario = custoUnitario;
         this.precoVenda = precoVenda;
         this.quantidade = quantidade;
+        this.valorTotal = precoVenda.multiply(new BigDecimal(quantidade));
     }
 
     public ProdutoUtilizado(int id, Categoria categoria, String marca, String descricao, BigDecimal custoUnitario, BigDecimal precoVenda,

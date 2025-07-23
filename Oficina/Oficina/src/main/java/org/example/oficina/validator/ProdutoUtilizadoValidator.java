@@ -1,7 +1,6 @@
 package org.example.oficina.validator;
 
 import org.example.oficina.model.ProdutoUtilizado;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;

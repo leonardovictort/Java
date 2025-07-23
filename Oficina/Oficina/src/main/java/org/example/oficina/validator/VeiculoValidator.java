@@ -1,7 +1,6 @@
 package org.example.oficina.validator;
 
 import org.example.oficina.model.Veiculo;
-
 import java.util.ArrayList;
 import java.util.List;
 

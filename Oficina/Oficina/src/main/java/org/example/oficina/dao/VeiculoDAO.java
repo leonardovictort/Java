@@ -1,9 +1,7 @@
 package org.example.oficina.dao;
 
-import org.example.oficina.model.Cliente;
 import org.example.oficina.model.TipoCombustivel;
 import org.example.oficina.model.Veiculo;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +32,6 @@ public class VeiculoDAO {
         this.connection = connection;
     }
 
-    // CREATE
     public boolean create(Veiculo veiculo) {
         try (PreparedStatement stmt = connection.prepareStatement(INSERT_SQL)) {
             preencherStatement(stmt, veiculo);
@@ -44,7 +41,6 @@ public class VeiculoDAO {
         }
     }
 
-    // UPDATE
     public boolean update(Veiculo veiculo) {
         try (PreparedStatement stmt = connection.prepareStatement(UPDATE_SQL)) {
             preencherStatement(stmt, veiculo);
@@ -55,7 +51,6 @@ public class VeiculoDAO {
         }
     }
 
-    // DELETE
     public boolean delete(int id) {
         try (PreparedStatement stmt = connection.prepareStatement(DELETE_SQL)) {
             stmt.setInt(1, id);
@@ -65,7 +60,6 @@ public class VeiculoDAO {
         }
     }
 
-    // READ BY ID
     public Optional<Veiculo> findById(int id) {
         try (PreparedStatement stmt = connection.prepareStatement(RETRIEVE_BY_ID_SQL)) {
             stmt.setInt(1, id);
@@ -79,7 +73,6 @@ public class VeiculoDAO {
         }
     }
 
-    // READ ALL
     public List<Veiculo> findAll() {
         List<Veiculo> veiculos = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(RETRIEVE_ALL_SQL);
@@ -92,8 +85,6 @@ public class VeiculoDAO {
             throw new RuntimeException("Erro ao buscar veículos", e);
         }
     }
-
-    // ========== MÉTODOS AUXILIARES ==========
 
     private void preencherStatement(PreparedStatement stmt, Veiculo veiculo) throws SQLException {
         stmt.setString(1, veiculo.getPlaca());

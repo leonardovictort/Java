@@ -4,7 +4,6 @@ import org.example.oficina.dao.VeiculoDAO;
 import org.example.oficina.model.Veiculo;
 import org.example.oficina.util.DatabaseConnection;
 import org.example.oficina.validator.VeiculoValidator;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
